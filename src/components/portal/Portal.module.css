@@ -1,0 +1,395 @@
+.portalContainer {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  display: flex;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: #0f172a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+}
+
+.sidebarHeader {
+  padding: 0 1.5rem 2rem;
+  border-bottom: 1px solid #1e293b;
+  margin-bottom: 1rem;
+}
+
+.sidebarHeader h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  color: #f8fafc;
+}
+
+.sidebarHeader p {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  margin: 0.25rem 0 0;
+}
+
+.navMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
+
+.navItem {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: #cbd5e1;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navItem:hover {
+  background-color: #1e293b;
+  color: white;
+}
+
+.navItem.active {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 2rem 3rem;
+  overflow-y: auto;
+}
+
+.pageHeader {
+  margin-bottom: 2rem;
+}
+
+.pageHeader h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+/* Kanban/List View */
+.kanbanBoard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.kanbanColumn {
+  background-color: #f1f5f9;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.columnHeader {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #334155;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.countBadge {
+  background-color: #e2e8f0;
+  color: #475569;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 12px;
+}
+
+.appointmentCard {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  cursor: pointer;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.appointmentCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+.patientName {
+  font-weight: 600;
+  color: #0f172a;
+  font-size: 1rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.appointmentTime {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.appointmentProblem {
+  font-size: 0.875rem;
+  color: #334155;
+  background-color: #f8fafc;
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Modals */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.modalContent {
+  background-color: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.modalHeader {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalHeader h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.closeBtn:hover {
+  color: #0f172a;
+}
+
+.modalBody {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.infoGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.infoLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.infoValue {
+  font-size: 1rem;
+  color: #0f172a;
+  margin: 0;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #334155;
+}
+
+.formGroup select,
+.formGroup input {
+  padding: 0.5rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.875rem;
+}
+
+.modalFooter {
+  padding: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  background-color: #f8fafc;
+  border-radius: 0 0 12px 12px;
+}
+
+.btnPrimary {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btnPrimary:hover {
+  background-color: #2563eb;
+}
+
+.btnSecondary {
+  background-color: white;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btnSecondary:hover {
+  background-color: #f1f5f9;
+}
+
+/* Settings View */
+.settingsCard {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 1.5rem;
+}
+
+.settingsCard h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.125rem;
+  color: #0f172a;
+}
+
+.checkboxGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.checkboxItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #334155;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .kanbanBoard {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mainContent {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .portalContainer {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .sidebarHeader {
+    padding: 0 0 1rem 0;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .navMenu {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 0;
+    gap: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  
+  .navMenu::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .navItem {
+    white-space: nowrap;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .mainContent {
+    padding: 1.5rem 1rem;
+  }
+  
+  .kanbanBoard {
+    grid-template-columns: 1fr;
+  }
+  
+  .pageHeader h1 {
+    font-size: 1.5rem;
+  }
+  
+  .modalContent {
+    max-height: 85vh;
+    border-radius: 12px 12px 0 0;
+    margin-top: auto;
+  }
+  
+  .modalOverlay {
+    align-items: flex-end;
+  }
+  
+  .modalBody .infoGroup {
+    grid-column: span 2;
+  }
+}
