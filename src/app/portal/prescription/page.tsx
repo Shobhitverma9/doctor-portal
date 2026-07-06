@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { PlusCircle, FileText, CheckCircle2, UserCircle2, Stethoscope, FilePlus, Activity, ChevronDown, ChevronUp } from 'lucide-react';
+import { PlusCircle, FileText, CheckCircle2, UserCircle2, Stethoscope, FilePlus, Activity, ChevronDown, ChevronUp, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
 import PatientSelector from '@/components/Prescription/PatientSelector';
 import MedicineInput from '@/components/Prescription/MedicineInput';
 import SmartSuggestions from '@/components/Prescription/SmartSuggestions';
@@ -140,6 +141,14 @@ export default function PrescriptionCreatorPage() {
       
       <div className="max-w-6xl mx-auto space-y-6">
         
+        {/* Back Navigation */}
+        <div className="mb-2">
+          <Link href="/portal" className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-blue-600 transition">
+            <ArrowLeft className="w-4 h-4 mr-1" />
+            Back to Dashboard
+          </Link>
+        </div>
+
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
