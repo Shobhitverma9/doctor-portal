@@ -62,36 +62,45 @@ export default function SmartSuggestions({ diagnosis, onAddMedicine }: SmartSugg
         {suggestions.length === 0 && !loading ? (
           <div className="p-4 text-sm text-gray-500 text-center">No previous data found for this diagnosis.</div>
         ) : (
-          <ul className="divide-y divide-gray-100 max-h-80 overflow-y-auto">
-            {suggestions.map((s, idx) => (
-              <li key={idx} className="p-4 hover:bg-gray-50 transition flex items-center justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center">
-                    <span className="font-semibold text-gray-800">{s.name}</span>
-                    <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
-                      {s.matchPercentage}% Match
-                    </span>
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    {s.typicalDosage || 'Dosage N/A'} • {s.typicalFrequency || 'Frequency N/A'} • {s.typicalDuration || 'Duration N/A'}
-                  </div>
+          <div className="max-h-[400px] overflow-y-auto">
+            {suggestions.map((group, groupIdx) => (
+              <div key={groupIdx} className="border-b border-gray-100 last:border-0">
+                <div className="bg-gray-50 px-4 py-2 sticky top-0 z-10 border-b border-gray-100">
+                  <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Matches for: {group.keyword}</span>
                 </div>
-                <button
-                  onClick={() => onAddMedicine({
-                    name: s.name,
-                    dosage: s.typicalDosage || '',
-                    frequency: s.typicalFrequency || '',
-                    duration: s.typicalDuration || '',
-                    instructions: ''
-                  })}
-                  className="ml-4 inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                >
-                  <PlusCircle className="w-4 h-4 mr-1" />
-                  Add
-                </button>
-              </li>
+                <ul className="divide-y divide-gray-50">
+                  {group.suggestions.map((s: any, idx: number) => (
+                    <li key={idx} className="p-4 hover:bg-gray-50 transition flex items-center justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-center">
+                          <span className="font-semibold text-gray-800">{s.name}</span>
+                          <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+                            {s.matchPercentage}% Match
+                          </span>
+                        </div>
+                        <div className="text-xs text-gray-500 mt-1">
+                          {s.typicalDosage || 'Dosage N/A'} • {s.typicalFrequency || 'Frequency N/A'} • {s.typicalDuration || 'Duration N/A'}
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => onAddMedicine({
+                          name: s.name,
+                          dosage: s.typicalDosage || '',
+                          frequency: s.typicalFrequency || '',
+                          duration: s.typicalDuration || '',
+                          instructions: ''
+                        })}
+                        className="ml-4 inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                      >
+                        <PlusCircle className="w-4 h-4 mr-1" />
+                        Add
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
       </div>
     </div>

@@ -8,12 +8,21 @@ export interface IPrescribedMedicine {
   instructions?: string;
 }
 
+export interface IVitals {
+  bloodPressure?: string;
+  pulse?: string;
+  temperature?: string;
+  weight?: string;
+  sugar?: string;
+}
+
 export interface IPrescription extends Document {
   patientId?: mongoose.Types.ObjectId;
   patientName: string;
   phone: string;
   age: string;
   diagnosis: string;
+  vitals?: IVitals;
   medicines: IPrescribedMedicine[];
   notes?: string;
   followUpDate?: Date;
@@ -29,6 +38,14 @@ const PrescribedMedicineSchema = new Schema<IPrescribedMedicine>({
   instructions: { type: String, required: false }, // e.g., After meals
 });
 
+const VitalsSchema = new Schema<IVitals>({
+  bloodPressure: { type: String, required: false },
+  pulse: { type: String, required: false },
+  temperature: { type: String, required: false },
+  weight: { type: String, required: false },
+  sugar: { type: String, required: false },
+}, { _id: false });
+
 const PrescriptionSchema: Schema<IPrescription> = new Schema(
   {
     patientId: { type: Schema.Types.ObjectId, ref: 'Appointment', required: false },
@@ -36,6 +53,7 @@ const PrescriptionSchema: Schema<IPrescription> = new Schema(
     phone: { type: String, required: true },
     age: { type: String, required: true },
     diagnosis: { type: String, required: true, index: true },
+    vitals: { type: VitalsSchema, required: false },
     medicines: [PrescribedMedicineSchema],
     notes: { type: String, required: false },
     followUpDate: { type: Date, required: false },

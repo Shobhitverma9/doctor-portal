@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     await connectDB();
     const body = await request.json();
     
-    const { patientId, patientName, phone, age, diagnosis, medicines, notes, followUpDate } = body;
+    const { patientId, patientName, phone, age, diagnosis, vitals, medicines, notes, followUpDate } = body;
     
     if (!patientName || !phone || !age || !diagnosis || !medicines) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -39,6 +39,7 @@ export async function POST(request: Request) {
       phone,
       age,
       diagnosis,
+      vitals,
       medicines,
       notes,
       followUpDate: followUpDate ? new Date(followUpDate) : undefined,

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { PlusCircle, FileText, CheckCircle2, UserCircle2, Stethoscope, FilePlus } from 'lucide-react';
+import { PlusCircle, FileText, CheckCircle2, UserCircle2, Stethoscope, FilePlus, Activity, ChevronDown, ChevronUp } from 'lucide-react';
 import PatientSelector from '@/components/Prescription/PatientSelector';
 import MedicineInput from '@/components/Prescription/MedicineInput';
 import SmartSuggestions from '@/components/Prescription/SmartSuggestions';
@@ -16,7 +16,20 @@ export default function PrescriptionCreatorPage() {
   const [age, setAge] = useState('');
   
   const [diagnosis, setDiagnosis] = useState('');
-  const [medicines, setMedicines] = useState<IPrescribedMedicine[]>([]);
+  const [medicines, setMedicines] = useState<IPrescribedMedicine[]>([
+    { name: '', dosage: '', frequency: '', duration: '', instructions: '' },
+    { name: '', dosage: '', frequency: '', duration: '', instructions: '' },
+    { name: '', dosage: '', frequency: '', duration: '', instructions: '' }
+  ]);
+  
+  const [showVitals, setShowVitals] = useState(false);
+  const [vitals, setVitals] = useState({
+    bloodPressure: '',
+    sugar: '',
+    pulse: '',
+    temperature: '',
+    weight: ''
+  });
   const [notes, setNotes] = useState('');
   const [followUpDate, setFollowUpDate] = useState('');
   
@@ -70,6 +83,7 @@ export default function PrescriptionCreatorPage() {
           phone,
           age,
           diagnosis,
+          vitals: Object.values(vitals).some(v => v !== '') ? vitals : undefined,
           medicines,
           notes,
           followUpDate
@@ -199,6 +213,77 @@ export default function PrescriptionCreatorPage() {
               </div>
             </div>
 
+            {/* Vitals & Reports (Optional) */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              <div 
+                className="flex items-center justify-between cursor-pointer"
+                onClick={() => setShowVitals(!showVitals)}
+              >
+                <h2 className="text-lg font-semibold text-gray-800 flex items-center">
+                  <Activity className="w-5 h-5 mr-2 text-blue-500" />
+                  Vitals & Test Reports <span className="ml-2 text-xs font-normal text-gray-500">(Optional)</span>
+                </h2>
+                <div className="text-gray-400">
+                  {showVitals ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                </div>
+              </div>
+              
+              {showVitals && (
+                <div className="mt-4 pt-4 border-t border-gray-100 grid grid-cols-2 md:grid-cols-5 gap-4">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Blood Pressure</label>
+                    <input
+                      type="text"
+                      value={vitals.bloodPressure}
+                      onChange={(e) => setVitals({...vitals, bloodPressure: e.target.value})}
+                      placeholder="e.g. 120/80"
+                      className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Blood Sugar</label>
+                    <input
+                      type="text"
+                      value={vitals.sugar}
+                      onChange={(e) => setVitals({...vitals, sugar: e.target.value})}
+                      placeholder="e.g. 110 mg/dL"
+                      className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Temperature</label>
+                    <input
+                      type="text"
+                      value={vitals.temperature}
+                      onChange={(e) => setVitals({...vitals, temperature: e.target.value})}
+                      placeholder="e.g. 98.6 F"
+                      className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Pulse Rate</label>
+                    <input
+                      type="text"
+                      value={vitals.pulse}
+                      onChange={(e) => setVitals({...vitals, pulse: e.target.value})}
+                      placeholder="e.g. 72 bpm"
+                      className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Weight</label>
+                    <input
+                      type="text"
+                      value={vitals.weight}
+                      onChange={(e) => setVitals({...vitals, weight: e.target.value})}
+                      placeholder="e.g. 70 kg"
+                      className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+
             {/* Diagnosis */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
               <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
@@ -296,6 +381,7 @@ export default function PrescriptionCreatorPage() {
           age={age}
           phone={phone}
           diagnosis={diagnosis}
+          vitals={Object.values(vitals).some(v => v !== '') ? vitals : undefined}
           medicines={medicines}
           notes={notes}
           followUpDate={followUpDate}

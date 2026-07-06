@@ -10,6 +10,13 @@ interface PrescriptionPreviewProps {
   age: string;
   phone: string;
   diagnosis: string;
+  vitals?: {
+    bloodPressure?: string;
+    sugar?: string;
+    pulse?: string;
+    temperature?: string;
+    weight?: string;
+  };
   medicines: IPrescribedMedicine[];
   notes?: string;
   followUpDate?: string;
@@ -25,6 +32,7 @@ export default function PrescriptionPreview({
   age,
   phone,
   diagnosis,
+  vitals,
   medicines,
   notes,
   followUpDate,
@@ -146,9 +154,48 @@ export default function PrescriptionPreview({
 
               {/* Diagnosis */}
               {diagnosis && (
-                <div className="mb-6">
-                  <h3 className="text-xs font-bold text-gray-800 uppercase mb-1">Diagnosis</h3>
+                <div className="mb-4">
+                  <h3 className="text-xs font-bold text-gray-800 uppercase mb-1">Diagnosis & Clinical Notes</h3>
                   <p className="text-gray-900 font-medium text-sm whitespace-pre-wrap">{diagnosis}</p>
+                </div>
+              )}
+
+              {/* Vitals */}
+              {vitals && Object.values(vitals).some(v => v) && (
+                <div className="mb-6 bg-gray-50 border border-gray-200 rounded p-3">
+                  <h3 className="text-xs font-bold text-gray-800 uppercase mb-2">Vitals & Reports</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+                    {vitals.bloodPressure && (
+                      <div>
+                        <p className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">BP</p>
+                        <p className="text-xs font-bold text-gray-900">{vitals.bloodPressure}</p>
+                      </div>
+                    )}
+                    {vitals.sugar && (
+                      <div>
+                        <p className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Sugar</p>
+                        <p className="text-xs font-bold text-gray-900">{vitals.sugar}</p>
+                      </div>
+                    )}
+                    {vitals.temperature && (
+                      <div>
+                        <p className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Temp</p>
+                        <p className="text-xs font-bold text-gray-900">{vitals.temperature}</p>
+                      </div>
+                    )}
+                    {vitals.pulse && (
+                      <div>
+                        <p className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Pulse</p>
+                        <p className="text-xs font-bold text-gray-900">{vitals.pulse}</p>
+                      </div>
+                    )}
+                    {vitals.weight && (
+                      <div>
+                        <p className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Weight</p>
+                        <p className="text-xs font-bold text-gray-900">{vitals.weight}</p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
 
