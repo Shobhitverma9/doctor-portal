@@ -1,6 +1,7 @@
 import mongoose, { Document, Model, Schema } from 'mongoose';
 
 export interface IAppointment extends Document {
+  patientId: string;
   patientName: string;
   phone: string;
   email: string;
@@ -19,6 +20,7 @@ export interface IAppointment extends Document {
 
 const AppointmentSchema: Schema<IAppointment> = new Schema(
   {
+    patientId: { type: String, required: true },
     patientName: { type: String, required: true },
     phone: { type: String, required: true },
     email: { type: String, required: true },
