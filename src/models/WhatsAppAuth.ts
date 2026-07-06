@@ -1,6 +1,6 @@
 import mongoose, { Document, Model, Schema } from 'mongoose';
 
-export interface IWhatsAppAuth extends Document {
+export interface IWhatsAppAuth {
   _id: string;
   data: any;
 }
