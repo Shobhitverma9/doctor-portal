@@ -40,15 +40,15 @@ export default function PatientSelector({ onSelect }: PatientSelectorProps) {
         const data = await res.json();
         const appointments = data.data || [];
         
-        // Filter today's open appointments
-        const todayOpen = appointments.filter((a: any) => 
-          a.status === 'open' && a.date === today
+        // Filter open appointments (regardless of date, in case they are from yesterday)
+        const openList = appointments.filter((a: any) => 
+          a.status === 'open'
         );
         
         // Extract unique patients for global search (fallback)
         const unique = Array.from(new Map(appointments.map((item: any) => [item.phone, item])).values()) as Patient[];
         
-        setOpenAppointments(todayOpen);
+        setOpenAppointments(openList);
         setGlobalPatients(unique);
       }
     } catch (e) {
@@ -90,15 +90,15 @@ export default function PatientSelector({ onSelect }: PatientSelectorProps) {
             <div className="px-4 py-3 text-gray-500 text-center animate-pulse">Loading patient data...</div>
           ) : (
             <>
-              {/* If search is empty, prioritize Today's Open Appointments */}
+              {/* If search is empty, prioritize Open Appointments */}
               {!searchTerm && (
                 <div className="mb-2">
                   <div className="bg-blue-50 text-blue-800 text-xs font-bold uppercase tracking-wider px-4 py-2 flex items-center sticky top-0 z-10">
                     <CalendarClock className="w-3 h-3 mr-1" />
-                    Today's Open Appointments
+                    Open Appointments
                   </div>
                   {openAppointments.length === 0 ? (
-                    <div className="px-4 py-3 text-gray-500 italic text-xs">No open appointments for today.</div>
+                    <div className="px-4 py-3 text-gray-500 italic text-xs">No open appointments found.</div>
                   ) : (
                     openAppointments.map((patient) => (
                       <div
